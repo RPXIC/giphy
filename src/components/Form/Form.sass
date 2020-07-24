@@ -1,0 +1,30 @@
+.form
+    display: flex
+    flex-direction: column
+    min-width: 290px
+    &__input
+        width: 8rem
+        height: 2rem
+        font-size: 1rem
+        min-width: 8rem
+        text-align: center
+        border-radius: 1rem
+        margin: 0.5rem auto
+        &:focus
+            width: 26vh
+            transition: width 1s
+            outline: none
+        &:not(:focus)
+            transition: width 1s
+    &__button
+        margin: 1rem auto
+        width: 8rem
+        &:hover
+            cursor: pointer
+
+.logo
+    font-family: 'Dancing Script', cursive
+    color: white
+    text-decoration: none
+    font-size: 8rem
+    margin: 0 auto

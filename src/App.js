@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense }  from 'react'
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
+import { SearchResults, Detail, Login/*, Register*/ } from 'pages'
+import { GifsContextProvider } from 'Context/GifsContext'
+import { UserContextProvider } from 'Context/UserContext'
+import 'App.sass'
 
-function App() {
+const HomePage = React.lazy(() => import('./pages/Home/Home'))
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <Switch>
+        <UserContextProvider>
+          <div className="App">
+            <Suspense fallback={null}>
+              <section className="App-content">
+                <GifsContextProvider>
+                  <Route component={HomePage} path='/' exact />
+                  <Route component={SearchResults} path='/search/:keyword/:rating?/:language?' />
+                  <Route component={Detail} path='/gif/:id' />
+                  <Route component={Login} path='/login' />
+                  {/* <Route component={Register} path='/register' /> */}
+                </GifsContextProvider>
+                  <Route component={()=> <h1>404 ERROR</h1>} path='/404' />
+              </section>
+              </Suspense>
+          </div>
+        </UserContextProvider>
+      </Switch>
+    </Router>
+  )
 }
-
-export default App;
+export default App
