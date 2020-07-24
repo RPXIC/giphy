@@ -1,21 +1,8 @@
 import { useContext, useCallback, useState } from 'react'
 import Context from 'Context/UserContext'
-import { gql, useMutation } from '@apollo/client'
-import client from 'config/apollo'
-
-const LOGIN = gql`
-  mutation authenticate($input: AuthenticateInput!) {
-    authenticate(input: $input) {
-      token
-    }
-  }
-`
-
-const FAV = gql `
-    mutation toggleFav($input: FavInput!) {
-        toggleFav(input: $input)
-    }
-`
+import { useMutation } from '@apollo/client'
+import client from 'gql/config/apollo'
+import { LOGIN, FAV } from 'gql/tags'
 
 const useUser = () => {
     const { favs, jwt, setFavs, setJwt } = useContext(Context)
@@ -57,13 +44,12 @@ const useUser = () => {
             })
             const { token } = data.authenticate
             window.sessionStorage.setItem('jwt', token)
-            fav("retrieve favs")
             setJwt(token)
         } catch (error) { 
             window.sessionStorage.removeItem('jwt')
             setError(error.message)
         }
-    }, [setJwt, authenticate, fav])
+    }, [setJwt, authenticate])
 
     return {
         isLogged: Boolean(jwt),

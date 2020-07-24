@@ -12,7 +12,7 @@ const Account = () => {
                 !isLogged ?
                     <Link to={'/login'} className="link">login</Link>
                 :
-                    <Link to={'/'} onClick={logout} className="link">Logout</Link>
+                    <Link to={'/'} onClick={logout} className="link">logout</Link>
             }
         </>
     )
