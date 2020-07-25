@@ -12,6 +12,7 @@ import Ratings from './Ratings/Ratings'
 import Fav from './Fav/Fav'
 import Like from './Like/Like'
 import Dislike from './Dislike/Dislike'
+import Modal from './Modal/Modal'
 
 export {
     Gif,
@@ -27,5 +28,6 @@ export {
     Ratings,
     Fav,
     Like,
-    Dislike
+    Dislike,
+    Modal
 }

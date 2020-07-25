@@ -1,12 +1,6 @@
 import React from 'react'
-import { Form } from '../../components'
+import { Form } from 'components'
 
-const Login = () => {
+const Login = () => <Form title='Login' />
 
-    return(
-        <>
-            <Form title='Login' />
-        </>
-    )
-}
 export default Login

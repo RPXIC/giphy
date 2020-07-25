@@ -6,9 +6,9 @@ import { LOGIN, FAV } from 'gql/tags'
 
 const useUser = () => {
     const { favs, jwt, setFavs, setJwt } = useContext(Context)
-    const [ authenticate ] = useMutation(LOGIN)
+    const [ authenticate, { loading:loadingLogin }] = useMutation(LOGIN)
     const [ toggleFav ] = useMutation(FAV)
-    const [ error, setError] = useState()
+    const [ error, setError ] = useState()
 
     const logout = useCallback(() => {
         window.sessionStorage.removeItem('jwt')
@@ -29,6 +29,7 @@ const useUser = () => {
             setFavs(favs)
         } catch (error) {
             setError(error.message)
+            setTimeout(() => setError(null), 3000)
         }
     }, [toggleFav, setFavs])
 
@@ -48,12 +49,14 @@ const useUser = () => {
         } catch (error) { 
             window.sessionStorage.removeItem('jwt')
             setError(error.message)
+            setTimeout(() => setError(null), 3000)
         }
     }, [setJwt, authenticate])
 
     return {
         isLogged: Boolean(jwt),
         login,
+        loadingLogin,
         logout,
         fav,
         favs,

@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom'
 import {Searcher, Account} from '../'
 import './Header.sass'
 
+
 const Header = () => {
+
     return (
         <div className="header">
             <div className="header__top">

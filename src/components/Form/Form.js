@@ -4,12 +4,15 @@ import useUser from 'hooks/useUser'
 import { Feedback } from 'components'
 import './Form.sass'
 
-const Form = ({title, history}) => {
-    const { login, isLogged, error } = useUser()
+const Form = ({title, history, onClose}) => {
+    const { login, isLogged, loadingLogin, error } = useUser()
     
     useEffect(() => {
-        if (isLogged) history.push('/')
-    }, [isLogged, history])
+        if (isLogged) {
+            history.push('/')
+            onClose && onClose()
+        }
+    }, [isLogged, history, onClose])
     
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -18,14 +21,16 @@ const Form = ({title, history}) => {
         login(username, password)
     }
 
+    if (loadingLogin) return <p className='loading'>Loading...</p>
+
     return (
-        <div>
+        <div className='content'>
             <Link to={'/'} className="logo">Giphy</Link>
-            <h2>{title}</h2>
+            <h2 className='title'>{title}</h2>
             <form onSubmit={handleSubmit} className='form'>
-                <input className='form__input' name='username' placeholder='username' />
+                <input className='form__input' name='username' placeholder='username' autoFocus />
                 <input className='form__input' type='password' name='password' placeholder='password' />
-                <button className='form__button' >{title}</button>
+                <button className='form__button'>{title}</button>
                 { error && <Feedback error={error} />}
             </form>
         </div>
