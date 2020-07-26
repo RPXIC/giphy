@@ -2,11 +2,12 @@ import { useContext, useCallback, useState } from 'react'
 import Context from 'Context/UserContext'
 import { useMutation } from '@apollo/client'
 import client from 'gql/config/apollo'
-import { LOGIN, FAV } from 'gql/tags'
+import { LOGIN, FAV, REGISTER } from 'gql/tags'
 
 const useUser = () => {
     const { favs, jwt, setFavs, setJwt } = useContext(Context)
     const [ authenticate, { loading:loadingLogin }] = useMutation(LOGIN)
+    const [ register, { loading:loadingRegister }] = useMutation(REGISTER)
     const [ toggleFav ] = useMutation(FAV)
     const [ error, setError ] = useState()
 
@@ -53,10 +54,29 @@ const useUser = () => {
         }
     }, [setJwt, authenticate])
 
+    const registerUser = useCallback(async(username, password) => {
+        try {
+            const { data } = await register({
+                variables: {
+                    input: {
+                        username,
+                        password
+                    }
+                }
+            })
+            console.log(data.register)
+        } catch (error) { 
+            setError(error.message)
+            setTimeout(() => setError(null), 3000)
+        }
+    }, [register])
+
     return {
         isLogged: Boolean(jwt),
         login,
         loadingLogin,
+        registerUser,
+        loadingRegister,
         logout,
         fav,
         favs,

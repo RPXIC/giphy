@@ -26,7 +26,7 @@ const Fav = ({ history, id }) => {
         : <i className="far fa-heart" aria-label="Add to favorites" onClick={handleClick}></i>
         }
 
-        {showModal && <Modal onClose={handleClose}> <Form title='login' onClose={handleClose}/> </Modal>}
+        {showModal && <Modal onClose={handleClose}> <Form title='Login' onClose={handleClose}/> </Modal>}
         </>
     )
 }

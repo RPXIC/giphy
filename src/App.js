@@ -1,6 +1,6 @@
 import React, { Suspense }  from 'react'
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
-import { SearchResults, Detail, Login/*, Register*/ } from 'pages'
+import { SearchResults, Detail, Login, Register } from 'pages'
 import { GifsContextProvider } from 'Context/GifsContext'
 import { UserContextProvider } from 'Context/UserContext'
 import 'App.sass'
@@ -20,7 +20,7 @@ const App = () => {
                   <Route component={SearchResults} path='/search/:keyword/:rating?/:language?' />
                   <Route component={Detail} path='/gif/:id' />
                   <Route component={Login} path='/login' />
-                  {/* <Route component={Register} path='/register' /> */}
+                  <Route component={Register} path='/register' />
                 </GifsContextProvider>
                   <Route component={()=> <h1>404 ERROR</h1>} path='/404' />
               </section>

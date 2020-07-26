@@ -5,23 +5,29 @@ import { Feedback } from 'components'
 import './Form.sass'
 
 const Form = ({title, history, onClose}) => {
-    const { login, isLogged, loadingLogin, error } = useUser()
+    const { login, registerUser, isLogged, loadingLogin, loadingRegister, error } = useUser()
+    const onLogin = title === 'Login'
+    const onRegister = title === 'Register'
     
     useEffect(() => {
-        if (isLogged) {
+        if (isLogged && onLogin) {
             history.push('/')
             onClose && onClose()
         }
-    }, [isLogged, history, onClose])
+    }, [isLogged, history, onClose, onLogin])
     
-    const handleSubmit = (e) => {
+    const handleSubmit = e => {
         e.preventDefault()
         const username = e.target.username.value
         const password = e.target.password.value
-        login(username, password)
+        if (onLogin) login(username, password)
+        if (onRegister) {
+            registerUser(username, password)
+            history.push('/login')
+        }
     }
 
-    if (loadingLogin) return <p className='loading'>Loading...</p>
+    if (loadingLogin || loadingRegister) return <p className='loading'>Loading...</p>
 
     return (
         <div className='content'>
@@ -31,6 +37,7 @@ const Form = ({title, history, onClose}) => {
                 <input className='form__input' name='username' placeholder='username' autoFocus />
                 <input className='form__input' type='password' name='password' placeholder='password' />
                 <button className='form__button'>{title}</button>
+                { onLogin && <Link to={'/register'} className='form__link'>Free register</Link> }
                 { error && <Feedback error={error} />}
             </form>
         </div>
