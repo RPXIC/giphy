@@ -10,11 +10,11 @@ const Form = ({title, history, onClose}) => {
     const onRegister = title === 'Register'
     
     useEffect(() => {
-        if (isLogged && onLogin) {
+        if (isLogged && (onLogin || onRegister)) {
             history.push('/')
             onClose && onClose()
         }
-    }, [isLogged, history, onClose, onLogin])
+    }, [isLogged, history, onClose, onLogin, onRegister])
     
     const handleSubmit = e => {
         e.preventDefault()
@@ -23,7 +23,7 @@ const Form = ({title, history, onClose}) => {
         if (onLogin) login(username, password)
         if (onRegister) {
             registerUser(username, password)
-            history.push('/login')
+                .then(res => {if (res) history.push('/login')})
         }
     }
 

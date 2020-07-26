@@ -32,7 +32,7 @@ const useUser = () => {
             setError(error.message)
             setTimeout(() => setError(null), 3000)
         }
-    }, [toggleFav, setFavs])
+    }, [toggleFav, setFavs, setError])
 
     const login = useCallback(async(username, password) => {
         try {
@@ -52,7 +52,7 @@ const useUser = () => {
             setError(error.message)
             setTimeout(() => setError(null), 3000)
         }
-    }, [setJwt, authenticate])
+    }, [setJwt, authenticate, setError])
 
     const registerUser = useCallback(async(username, password) => {
         try {
@@ -64,12 +64,12 @@ const useUser = () => {
                     }
                 }
             })
-            console.log(data.register)
+            if (data) return data.register
         } catch (error) { 
             setError(error.message)
             setTimeout(() => setError(null), 3000)
         }
-    }, [register])
+    }, [register, setError])
 
     return {
         isLogged: Boolean(jwt),
