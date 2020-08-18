@@ -1,21 +1,20 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import './Category.sass'
+import { CategoryContent, CategoryTitle, CategoryList, CategoryListItem, CategoryLink } from './styles'
 
 const Category =  ({ name, options = [] }) => {
     return (
-        <div className="category">
-            <h3 className="category__title">{name}</h3>
-            <ul className="category__list">
-                {options.map((singleOption) => (
-                <li key={singleOption}>
-                    <Link className="category__link" to={`/search/${singleOption}`}>
-                        {singleOption}
-                    </Link>
-                </li>
+        <CategoryContent>
+            <CategoryTitle>{name}</CategoryTitle>
+            <CategoryList>
+                {options.map((singleOption, index) => (
+                    <CategoryListItem key={singleOption} index={index}>
+                        <CategoryLink to={`/search/${singleOption}`}>
+                            {singleOption}
+                        </CategoryLink>
+                    </CategoryListItem>
                 ))}
-            </ul>
-        </div>
+            </CategoryList>
+        </CategoryContent>
     )
 }
 export default React.memo(Category)

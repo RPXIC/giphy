@@ -4,7 +4,7 @@ import { ListOfGifs, Header } from 'components'
 import useGifs from 'hooks/useGifs'
 import useNearScreen from 'hooks/useNearScreen'
 import debounce from 'just-debounce-it'
-import SpinnerGrid from 'components/Spinner/SpinnerGrid'
+import Spinner from 'components/Spinner/Spinner'
 
 const SearchResults = props => {
     const { keyword, rating, language } = props.match.params
@@ -24,7 +24,7 @@ const SearchResults = props => {
 
     return <>
         { loading
-            ? <SpinnerGrid />
+            ? <Spinner />
             : <>
                 <Helmet>
                     <title>{title} | Giphy</title>
