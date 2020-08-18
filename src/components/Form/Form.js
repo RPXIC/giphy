@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import useUser from 'hooks/useUser'
-import { Feedback } from 'components'
+import { Feedback, Spinner } from 'components'
 import './Form.sass'
 
 const Form = ({title, history, onClose}) => {
@@ -30,7 +30,7 @@ const Form = ({title, history, onClose}) => {
     }, [isLogged, history, onClose, onLogin, onRegister])
     
 
-    if (loadingLogin || loadingRegister) return <p className='loading'>Loading...</p>
+    if (loadingLogin || loadingRegister) return <Spinner />
 
     return (
         <div className='content'>

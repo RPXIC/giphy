@@ -1,6 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import { Fav, Like, Dislike } from 'components'
+import { Fav/*, Like, Dislike */} from 'components'
 import './Ratings.sass'
 
 const Ratings = ({ history, id }) => {
@@ -12,9 +12,9 @@ const Ratings = ({ history, id }) => {
             ? "ratings--detail"
             : "ratings"
         }>
-            <Like id={id} />
+            {/* <Like id={id} /> */}
             <Fav id={id}/>
-            <Dislike id={id} />
+            {/* <Dislike id={id} /> */}
         </div>
     )
 }

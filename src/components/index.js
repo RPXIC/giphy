@@ -13,6 +13,7 @@ import Fav from './Fav/Fav'
 import Like from './Like/Like'
 import Dislike from './Dislike/Dislike'
 import Modal from './Modal/Modal'
+import Button from './Button/Button'
 
 export {
     Gif,
@@ -29,5 +30,6 @@ export {
     Fav,
     Like,
     Dislike,
-    Modal
+    Modal,
+    Button
 }
