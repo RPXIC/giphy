@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import useUser from 'hooks/useUser'
-import { Feedback, Spinner } from 'components'
+import { Feedback, Spinner, Button } from 'components'
 import './Form.sass'
 
 const Form = ({title, history, onClose}) => {
@@ -43,7 +43,7 @@ const Form = ({title, history, onClose}) => {
                 <input className='form__input' type='password' name='password' placeholder='password' ref={register({ required: 'password is required'})} />
                 {errors.password && <Feedback error={errors.password.message} />}
 
-                <button className='form__button'>{title}</button>
+                <Button>{title}</Button>
                 { onLogin && <Link to={'/register'} className='form__link'>Free register</Link> }
                 { error && <Feedback error={error} />}
             </form>

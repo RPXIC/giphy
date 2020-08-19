@@ -9,7 +9,7 @@ export const Link = styled(LinkRouter)`
     font-weight: 600;
     cursor: pointer;
     font-size: 1rem;
-    margin: 1rem 0;
+    margin: 1rem auto;
     text-decoration: none;
 
     &:hover {
