@@ -1,53 +1,60 @@
-import React, { useEffect } from 'react'
-import { withRouter, Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import useUser from 'hooks/useUser'
 import { Feedback, Spinner, Button } from 'components'
+import useUser from 'hooks/useUser'
 import './Form.sass'
 
-const Form = ({title, history, onClose}) => {
-    const { login, registerUser, isLogged, loadingLogin, loadingRegister, error } = useUser()
-    const { register, handleSubmit, errors } = useForm()
+const Form = ({ title, onClose }) => {
+  const navigate = useNavigate()
+  const { login, registerUser, isLogged, loadingLogin, loadingRegister, error } = useUser()
+  const { register, handleSubmit, errors } = useForm()
 
-    const onLogin = title === 'Login'
-    const onRegister = title === 'Register'
-    
-    const onSubmit = values => {
-        const username = values.username
-        const password = values.password
-        if (onLogin) login(username, password)
-        if (onRegister) {
-            registerUser(username, password)
-                .then(res => {if (res) history.push('/login')})
-        }
+  const onLogin = title === 'Login'
+  const onRegister = title === 'Register'
+
+  const onSubmit = (values) => {
+    const username = values.username
+    const password = values.password
+    if (onLogin) login(username, password)
+    if (onRegister) {
+      registerUser(username, password).then((res) => {
+        if (res) navigate('/login')
+      })
     }
-    
-    useEffect(() => {
-        if (isLogged && (onLogin || onRegister)) {
-            history.push('/')
-            onClose && onClose()
-        }
-    }, [isLogged, history, onClose, onLogin, onRegister])
-    
+  }
 
-    if (loadingLogin || loadingRegister) return <Spinner />
+  useEffect(() => {
+    if (isLogged && (onLogin || onRegister)) {
+      navigate('/')
+      onClose && onClose()
+    }
+  }, [isLogged, navigate, onClose, onLogin, onRegister])
 
-    return (
-        <div className='content'>
-            <Link to={'/'} className="logo">Giphy</Link>
-            <h2 className='title'>{title}</h2>
-            <form onSubmit={handleSubmit(onSubmit)} className='form'>
-                <input className='form__input' name='username' placeholder='username' autoFocus ref={register({ required: 'username is required'})} />
-                {errors.username && <Feedback error={errors.username.message} />}
+  if (loadingLogin || loadingRegister) return <Spinner />
 
-                <input className='form__input' type='password' name='password' placeholder='password' ref={register({ required: 'password is required'})} />
-                {errors.password && <Feedback error={errors.password.message} />}
+  return (
+    <div className='content'>
+      <Link to={'/'} className='logo'>
+        Giphy
+      </Link>
+      <h2 className='title'>{title}</h2>
+      <form onSubmit={handleSubmit((data) => onSubmit(data))} className='form'>
+        <input className='form__input' name='username' placeholder='username' autoFocus {...register('username', { required: true, message: 'iep' })} />
+        {errors?.username && <Feedback error={errors.username.message} />}
 
-                <Button>{title}</Button>
-                { onLogin && <Link to={'/register'} className='form__link'>Free register</Link> }
-                { error && <Feedback error={error} />}
-            </form>
-        </div>
-    )
+        <input className='form__input' type='password' name='password' placeholder='password' {...register('password', { required: true })} />
+        {errors?.password && <Feedback error={errors.password.message} />}
+
+        <Button>{title}</Button>
+        {onLogin && (
+          <Link to={'/register'} className='form__link'>
+            Free register
+          </Link>
+        )}
+        {error && <Feedback error={error} />}
+      </form>
+    </div>
+  )
 }
-export default withRouter(Form)
+export default Form

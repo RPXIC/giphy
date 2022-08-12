@@ -1,22 +1,22 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import './index.css'
+import { createRoot } from 'react-dom/client'
 import App from './App'
+import './index.css'
 import * as serviceWorker from './serviceWorker'
 import { ApolloProvider } from '@apollo/client'
 import client from './gql/config/apollo'
-import { ThemeProvider } from 'emotion-theming'
+import { ThemeProvider } from '@emotion/react'
 import { theme } from 'styles/styles'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <ApolloProvider client={client}>
-      <ThemeProvider theme={theme}>
-        <App />
-      </ThemeProvider>
-    </ApolloProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
+const container = document.getElementById('app')
+const root = createRoot(container)
+
+root.render(
+  <ApolloProvider client={client}>
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
+  </ApolloProvider>
 )
 
 serviceWorker.unregister()

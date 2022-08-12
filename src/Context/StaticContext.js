@@ -1,7 +1,7 @@
-import React from 'react'
+import { createContext } from 'react'
 
-const Context = React.createContext({
-    name: 'undefined without provider'
+const Context = createContext({
+  name: 'undefined without provider'
 })
 
 export default Context
