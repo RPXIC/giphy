@@ -1,34 +1,39 @@
-import React, { Suspense }  from 'react'
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
+import { Suspense, lazy } from 'react'
+import { Route, BrowserRouter, Routes } from 'react-router-dom'
 import { SearchResults, Detail, Login, Register, Error } from 'pages'
 import { GifsContextProvider } from 'Context/GifsContext'
 import { UserContextProvider } from 'Context/UserContext'
 import 'App.sass'
 
-const HomePage = React.lazy(() => import('./pages/Home/Home'))
+const HomePage = lazy(() => import('./pages/Home/Home'))
 
-const App = () => {
-  return (
-    <Router>
-      <UserContextProvider>
-        <div className="App">
-          <Suspense fallback={null}>
-            <section className="App-content">
-              <GifsContextProvider>
-                <Switch>
-                  <Route component={HomePage} exact path='/' />
-                  <Route component={SearchResults} exact path='/search/:keyword/:rating?/:language?' />
-                  <Route component={Detail} exact path='/gif/:id' />
-                  <Route component={Login} exact path='/login' />
-                  <Route component={Register} exact path='/register' />
-                  <Route component={Error} />
-                </Switch>
-              </GifsContextProvider>
-            </section>
-            </Suspense>
-        </div>
-      </UserContextProvider>
-    </Router>
-  )
-}
+const App = () => (
+  <BrowserRouter>
+    <UserContextProvider>
+      <div className='App'>
+        <Suspense fallback={null}>
+          <section className='App-content'>
+            <GifsContextProvider>
+              <Routes>
+                <Route element={<HomePage />} exact path='/' />
+                <Route element={<SearchResults />} path='/search'>
+                  <Route element={<SearchResults />} path=':keyword'>
+                    <Route element={<SearchResults />} path=':rating'>
+                      <Route element={<SearchResults />} path=':language' />
+                    </Route>
+                  </Route>
+                </Route>
+                <Route element={<Detail />} exact path='/gif/:id' />
+                <Route element={<Login />} exact path='/login' />
+                <Route element={<Register />} exact path='/register' />
+                <Route element={<Error />} />
+              </Routes>
+            </GifsContextProvider>
+          </section>
+        </Suspense>
+      </div>
+    </UserContextProvider>
+  </BrowserRouter>
+)
+
 export default App

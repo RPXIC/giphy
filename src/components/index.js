@@ -1,35 +1,16 @@
-import Gif from './Gif/Gif'
-import ListOfGifs from './ListOfGifs/ListOfGifs'
-import Searcher from './Searcher/Searcher'
-import TrendingSearches from './TrendingSearches/TrendingSearches'
-import Category from './Category/Category'
-import Spinner from './Spinner/Spinner'
-import Header from './Header/Header'
 import Account from './Account/Account'
-import Form from './Form/Form'
-import Feedback from './Feedback/Feedback'
-import Ratings from './Ratings/Ratings'
-import Fav from './Fav/Fav'
-import Like from './Like/Like'
-import Dislike from './Dislike/Dislike'
-import Modal from './Modal/Modal'
 import Button from './Button/Button'
+import Category from './Category/Category'
+import Fav from './Fav/Fav'
+import Feedback from './Feedback/Feedback'
+import Form from './Form/Form'
+import Gif from './Gif/Gif'
+import Header from './Header/Header'
+import ListOfGifs from './ListOfGifs/ListOfGifs'
+import Modal from './Modal/Modal'
+import Ratings from './Ratings/Ratings'
+import Searcher from './Searcher/Searcher'
+import Spinner from './Spinner/Spinner'
+import TrendingSearches from './TrendingSearches/TrendingSearches'
 
-export {
-    Gif,
-    ListOfGifs,
-    Searcher,
-    TrendingSearches,
-    Category,
-    Spinner,
-    Header,
-    Account,
-    Form,
-    Feedback,
-    Ratings,
-    Fav,
-    Like,
-    Dislike,
-    Modal,
-    Button
-}
+export { Gif, ListOfGifs, Searcher, TrendingSearches, Category, Spinner, Header, Account, Form, Feedback, Ratings, Fav, Modal, Button }

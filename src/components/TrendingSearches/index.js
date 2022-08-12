@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react'
-import getTrendingGifs from 'services/getTrendingGifs'
+import { useState, useEffect } from 'react'
 import { Category } from 'components'
+import getTrendingGifs from 'services/getTrendingGifs'
 
-export default () => {
-    const [ trends, setTrends ] = useState()
-    
-    useEffect(() => {
-        (async () => {
-            const gifs = await getTrendingGifs()
-            setTrends(gifs)
-        })()
-    },[])
-    
-    return <Category name='Trendings' options={trends}/>
+const TrendingSearches = () => {
+  const [trends, setTrends] = useState()
+
+  useEffect(() => {
+    ;(async () => {
+      const gifs = await getTrendingGifs()
+      setTrends(gifs)
+    })()
+  }, [])
+
+  return <Category name='Trendings' options={trends} />
 }
+
+export default TrendingSearches

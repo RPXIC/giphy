@@ -1,18 +1,13 @@
-import React from 'react'
-import { withRouter } from 'react-router-dom'
-import useUser from 'hooks/useUser'
-import './Like.sass'
+// import useUser from 'hooks/useUser'
+// import './Like.sass'
 
-const Fav = ({ history, id }) => {
-    const { isLogged } = useUser()
+// const Like = ({ id }) => {
+//   const { isLogged } = useUser()
 
-    const handleClick = () => {
-        if (!isLogged) return history.push('/login')
-        console.log(id)
-    }
+//   const handleClick = () => {
+//     if (!isLogged) return history.push('/login')
+//   }
 
-    return (
-        <i className="far fa-thumbs-up" onClick={handleClick}></i>
-    )
-}
-export default withRouter(Fav)
+//   return <i className='far fa-thumbs-up' onClick={handleClick}></i>
+// }
+// export default Like
